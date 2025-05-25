@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Online & Game Seru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Toko Seru</a>
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#game-section">Main Game</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#" class="cart-icon" id="openCartModal"><i class="fas fa-shopping-cart"></i> <span id="cart-count">0</span></a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Temukan Produk Terbaik & Mainkan Game Seru!</h1>
+            <p>Belanja kebutuhan Anda dan hibur diri dengan game menarik.</p>
+            <a href="#products" class="btn btn-primary">Lihat Produk</a>
+            <a href="#game-section" class="btn btn-secondary">Main Game Sekarang</a>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2>Produk Unggulan Kami</h2>
+            <div class="product-grid" id="productGrid">
+                </div>
+        </div>
+    </section>
+
+    <section id="game-section" class="game-section">
+        <div class="container">
+            <h2>Memory Game: Uji Ingatanmu!</h2>
+            <p class="game-description">Cocokkan semua pasangan kartu untuk memenangkan permainan. Semakin cepat, semakin baik!</p>
+            <div class="game-container">
+                <div id="game-board" class="game-board">
+                    </div>
+                <div class="game-info">
+                    <p>Waktu: <span id="game-timer">00:00</span></p>
+                    <p>Pasangan Ditemukan: <span id="matched-pairs">0</span> / <span id="total-pairs">0</span></p>
+                    <button id="reset-game-btn" class="btn btn-game-reset">Mulai Ulang Game</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Toko Seru. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeCartModal">&times;</span>
+            <h2>Keranjang Belanja Anda</h2>
+            <div id="cartItemsContainer" class="cart-items-container">
+                </div>
+            <div class="cart-summary">
+                <p>Total: <span id="cartTotalPrice">Rp 0</span></p>
+                <button class="btn btn-primary">Lanjutkan ke Pembayaran</button>
+            </div>
+            <p id="emptyCartMessage" class="empty-cart-message hidden">Keranjang Anda kosong.</p>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

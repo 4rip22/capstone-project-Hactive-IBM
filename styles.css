@@ -2,3 +2,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* Global styles for body and font */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom button styles */
+.btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold cursor-pointer transition-all duration-200 ease-in-out shadow-md;
+}
+
+.btn:hover {
+    @apply transform -translate-y-1 shadow-lg;
+}
+
+.btn:active {
+    @apply transform translate-y-0 shadow-sm;
+}
+
+.btn-primary {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 text-white;
+}
+
+.btn-primary:hover {
+    @apply from-indigo-700 to-purple-700;
+}
+
+.btn-secondary {
+    @apply bg-gray-200 text-gray-700;
+}
+
+.btn-secondary:hover {
+    @apply bg-gray-300;
+}
+
+.btn-danger {
+    @apply bg-red-500 text-white;
+}
+
+.btn-danger:hover {
+    @apply bg-red-600;
+}
+
+/* Input field styles */
+.input-field {
+    @apply w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200;
+}
+
+/* Product card specific styles */
+.product-card {
+    @apply bg-white p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer;
+}
+
+/* Cart item specific styles */
+.cart-item {
+    @apply bg-white p-4 rounded-xl shadow-sm flex items-center justify-between;
+}
+
+/* Animations defined in tailwind.config.js */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slide-in {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pop-in {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}

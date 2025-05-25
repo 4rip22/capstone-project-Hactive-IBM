@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Data produk contoh
     const products = [
-        { id: 1, name: 'Smartwatch X1', price: 1500000, imageUrl: 'https://placehold.co/300x200/3498db/ffffff?text=Smartwatch' },
-        { id: 2, name: 'Headphone Nirkabel', price: 850000, imageUrl: 'https://placehold.co/300x200/2ecc71/ffffff?text=Headphone' },
-        { id: 3, name: 'Kamera Digital Pro', price: 4500000, imageUrl: 'https://placehold.co/300x200/e67e22/ffffff?text=Kamera' },
-        { id: 4, name: 'Power Bank 20000mAh', price: 300000, imageUrl: 'https://placehold.co/300x200/9b59b6/ffffff?text=Powerbank' },
-        { id: 5, name: 'Mouse Gaming RGB', price: 250000, imageUrl: 'https://placehold.co/300x200/f1c40f/ffffff?text=Mouse' },
-        { id: 6, name: 'Keyboard Mekanik', price: 700000, imageUrl: 'https://placehold.co/300x200/1abc9c/ffffff?text=Keyboard' },
+        { id: 1, name: 'Smartwatch X1', price: 1500000, imageUrl: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }, // Smartwatch
+        { id: 2, name: 'Iphone 15', price: 15000000, imageUrl: 'https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/iphone_15_hero.png' }, // Headphone
+        { id: 3, name: 'Kamera Digital Pro', price: 4500000, imageUrl: 'https://specialist.co.id/cdn/shop/files/01_f5e5c564-cddf-4e3b-871e-0f066d103a8a.jpg?v=1746770918' }, // Kamera
+        { id: 4, name: 'Laptop macbook m2 pro', price: 13090900, imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3QK28rx_H_hNGhSpYjMz5eQhBA6QSc7mADg&s' }, // Power Bank
+        { id: 5, name: 'Mouse Gaming RGB', price: 250000, imageUrl: 'https://down-id.img.susercontent.com/file/sg-11134201-22120-vk05as0r8glva3' }, // Mouse Gaming
+        { id: 6, name: 'Keyboard Mekanik', price: 150000, imageUrl: 'https://down-id.img.susercontent.com/file/bd7ab9d945f0b0535e42badcb7252086' }, // Keyboard Mekanik
     ];
 
     // Menginisialisasi keranjang dari localStorage atau array kosong
@@ -71,6 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi untuk menambahkan produk ke keranjang (Create)
     function addToCart(productId) {
         const existingItemIndex = cart.findIndex(item => item.productId === productId);
+        const product = products.find(p => p.id === productId); // Dapatkan detail produk
+
+        if (!product) {
+            console.error('Produk tidak ditemukan.');
+            showMessageBox('Terjadi kesalahan: Produk tidak ditemukan.', 'error');
+            return;
+        }
 
         if (existingItemIndex > -1) {
             // Jika produk sudah ada di keranjang, tingkatkan kuantitasnya
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartCountDisplay(); // Perbarui tampilan jumlah item
         renderCartItems(); // Perbarui tampilan modal keranjang jika terbuka
         console.log(`Produk dengan ID ${productId} ditambahkan ke keranjang.`, cart);
-        showMessageBox('Produk berhasil ditambahkan ke keranjang!', 'success');
+        showMessageBox(`${product.name} berhasil ditambahkan ke keranjang!`, 'success'); // Notifikasi lebih spesifik
     }
 
     // Fungsi untuk merender item di modal keranjang (Read)
@@ -155,6 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi untuk memperbarui kuantitas item di keranjang (Update)
     function updateQuantity(productId, change) {
         const itemIndex = cart.findIndex(item => item.productId === productId);
+        const product = products.find(p => p.id === productId); // Dapatkan detail produk
+
         if (itemIndex > -1) {
             cart[itemIndex].quantity += change;
             if (cart[itemIndex].quantity <= 0) {
@@ -164,18 +173,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveCart();
                 updateCartCountDisplay();
                 renderCartItems();
+                // Notifikasi saat kuantitas diubah
+                showMessageBox(`Kuantitas ${product.name} diperbarui menjadi ${cart[itemIndex].quantity}.`, 'info');
             }
         }
     }
 
     // Fungsi untuk menghapus item dari keranjang (Delete)
     function removeItemFromCart(productId) {
+        const product = products.find(p => p.id === productId); // Dapatkan detail produk
         // Filter array cart, hanya menyimpan item yang ID-nya tidak sama dengan productId yang akan dihapus
         cart = cart.filter(item => item.productId !== productId);
         saveCart();
         updateCartCountDisplay();
         renderCartItems();
-        showMessageBox('Produk dihapus dari keranjang.', 'info');
+        showMessageBox(`${product.name} dihapus dari keranjang.`, 'info'); // Notifikasi lebih spesifik
     }
 
 

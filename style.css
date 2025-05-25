@@ -663,7 +663,6 @@ p {
         grid-template-columns: repeat(2, 1fr); /* Even smaller for very small screens */
         max-width: 300px;
     }
-
     .card-face {
         font-size: 30px;
     }

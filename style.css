@@ -1,4 +1,8 @@
 /* General Styles */
+html {
+    scroll-behavior: smooth; /* Menambahkan smooth scroll untuk seluruh halaman */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -201,14 +205,14 @@ p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-.products-section h2, .game-section h2 {
+.products-section h2, .game-section h2, .contact-section h2 {
     text-align: center;
     font-size: 36px;
     margin-bottom: 50px;
     position: relative;
 }
 
-.products-section h2::after, .game-section h2::after {
+.products-section h2::after, .game-section h2::after, .contact-section h2::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -363,6 +367,73 @@ p {
     font-weight: 700;
     color: #3498db;
 }
+
+/* Contact Section */
+.contact-section {
+    padding: 80px 0;
+    background-color: #fff;
+    margin-top: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.contact-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding in width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.contact-form .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+}
+
 
 /* Footer */
 .footer {
@@ -612,7 +683,7 @@ p {
         margin-top: 15px;
     }
 
-    .products-section h2, .game-section h2 {
+    .products-section h2, .game-section h2, .contact-section h2 {
         font-size: 30px;
     }
 
@@ -644,6 +715,10 @@ p {
         width: 100%; /* Full width for actions */
         justify-content: space-between;
     }
+
+    .contact-form {
+        padding: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -663,6 +738,7 @@ p {
         grid-template-columns: repeat(2, 1fr); /* Even smaller for very small screens */
         max-width: 300px;
     }
+
     .card-face {
         font-size: 30px;
     }

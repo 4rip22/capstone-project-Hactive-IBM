@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTotalPriceDisplay = document.getElementById('cartTotalPrice');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
 
+    // Elemen formulir kontak
+    const contactForm = document.getElementById('contactForm');
+
 
     // Data produk contoh
     const products = [
@@ -208,6 +211,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Logika Formulir Kontak ---
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Mencegah pengiriman formulir default
+
+        // Ambil nilai dari input formulir
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Simulasi pengiriman data (misalnya, ke konsol)
+        console.log('Pesan Kontak Diterima:');
+        console.log('Nama:', name);
+        console.log('Email:', email);
+        console.log('Pesan:', message);
+
+        // Tampilkan pesan sukses kepada pengguna
+        showMessageBox('Pesan Anda telah berhasil dikirim!', 'success');
+
+        // Bersihkan formulir setelah pengiriman
+        contactForm.reset();
+    });
+
 
     // Logika Hamburger Menu
     hamburger.addEventListener('click', () => {
@@ -225,7 +250,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Menutup menu saat link diklik (untuk pengalaman mobile)
     navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (event) => {
+            // Mencegah perilaku default link (lompat langsung)
+            event.preventDefault();
+
+            // Dapatkan target ID dari href link
+            const targetId = link.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth' // Animasi scroll halus
+                    });
+                }
+            }
+
+            // Tutup menu hamburger setelah mengklik link (untuk mobile)
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 hamburger.querySelector('i').classList.remove('fa-times');

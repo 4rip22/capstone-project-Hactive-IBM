@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 103, title: 'Laptop Coding ThinkPad X1', price: 1800, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwn8nv7Hxl_B6jWhQ1Lev15sqdAzx8k7C4Q&s', category: 'electronics' }, 
         { id: 105, title: 'Headphone Nirkabel', price: 50, image: 'https://s.alicdn.com/@sc04/kf/Haf12b41bbd274f5d9a491f35042bf7a6N.jpg_720x720q50.jpg', category: 'electronics' }, 
         { id: 106, title: 'Kamera Digital Pro', price: 300, image: 'https://foto.kontan.co.id/GWZlkiGGRZs8iHBzSKc06rDIvcQ=/smart/2020/08/04/600418153p.jpg', category: 'electronics' }, 
-        { id: 107, title: 'Power Bank 20000mAh', price: 20, image: 'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/115/MTA-179057787/samsung_samsung_power_bank_20000mah_3_port_45w_fast_charging_garansi_resmi_full01_p86sj7yp.jpg', category: 'electronics' }, 
+        { id: 107, title: 'Power Bank 20000mAh', price: 20, image: 'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/115/MTA-179057787/samsung_samsung_power_bank_20000mah_3_port_45w_fast_charging_garansi_resmi_full01_p86sj7yp.jpg', category: 'electronics' }, // [Image of Power Bank 20000mAh]
         { id: 108, title: 'Mouse Gaming RGB', price: 15, image: 'https://img.lazcdn.com/g/p/eb6b0b2a09c3789fd6754b87efca469c.jpg_720x720q80.jpg', category: 'electronics' }, 
         { id: 109, title: 'Keyboard Mekanik', price: 45, image: 'https://images.tokopedia.net/img/cache/700/VqbcmM/2023/5/30/8a74e2f2-1ea2-4174-8237-bdd0f77dacbd.png', category: 'electronics' }, 
     ];

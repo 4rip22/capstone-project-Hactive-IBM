@@ -38,24 +38,92 @@
     <section id="products" class="products-section">
         <div class="container">
             <h2>Produk Unggulan Kami</h2>
+            <div class="search-bar-container">
+                <input type="text" id="searchInput" placeholder="Cari produk..." class="search-input">
+                <button id="searchBtn" class="search-button"><i class="fas fa-search"></i></button>
+            </div>
             <div class="product-grid" id="productGrid">
+                </div>
+        </div>
+    </section>
+
+    <section id="recommendations" class="recommendations-section">
+        <div class="container">
+            <h2>Produk Rekomendasi untuk Anda</h2>
+            <div class="product-grid" id="recommendationGrid">
                 </div>
         </div>
     </section>
 
     <section id="game-section" class="game-section">
         <div class="container">
-            <h2>Memory Game: Uji Ingatanmu!</h2>
-            <p class="game-description">Cocokkan semua pasangan kartu untuk memenangkan permainan. Semakin cepat, semakin baik!</p>
-            <div class="game-container">
-                <div id="game-board" class="game-board">
+            <h2>Pilih Game Favoritmu!</h2>
+            <div class="game-selection-buttons">
+                <button id="selectMemoryGame" class="btn btn-game-select active">Memory Game</button>
+                <button id="selectTicTacToe" class="btn btn-game-select">Tic Tac Toe</button>
+                <button id="selectRockPaperScissors" class="btn btn-game-select">Batu-Gunting-Kertas</button>
+                <button id="selectGuessTheNumber" class="btn btn-game-select">Tebak Angka</button>
+            </div>
+
+            <div id="memoryGameContainer" class="game-container active-game">
+                <p class="game-description">Cocokkan semua pasangan kartu untuk memenangkan permainan. Semakin cepat, semakin baik!</p>
+                <div id="memory-game-board" class="game-board">
                     </div>
                 <div class="game-info">
-                    <p>Waktu: <span id="game-timer">00:00</span></p>
-                    <p>Pasangan Ditemukan: <span id="matched-pairs">0</span> / <span id="total-pairs">0</span></p>
-                    <button id="reset-game-btn" class="btn btn-game-reset">Mulai Ulang Game</button>
+                    <p>Waktu: <span id="memory-game-timer">00:00</span></p>
+                    <p>Pasangan Ditemukan: <span id="memory-matched-pairs">0</span> / <span id="memory-total-pairs">0</span></p>
+                    <button id="reset-memory-game-btn" class="btn btn-game-reset">Mulai Ulang Game</button>
                 </div>
             </div>
+
+            <div id="ticTacToeGameContainer" class="game-container hidden-game">
+                <p class="game-description">Mainkan Tic Tac Toe melawan teman! Pemain pertama 'X', pemain kedua 'O'.</p>
+                <div id="tic-tac-toe-board" class="tic-tac-toe-board">
+                    <div class="cell" data-cell-index="0"></div>
+                    <div class="cell" data-cell-index="1"></div>
+                    <div class="cell" data-cell-index="2"></div>
+                    <div class="cell" data-cell-index="3"></div>
+                    <div class="cell" data-cell-index="4"></div>
+                    <div class="cell" data-cell-index="5"></div>
+                    <div class="cell" data-cell-index="6"></div>
+                    <div class="cell" data-cell-index="7"></div>
+                    <div class="cell" data-cell-index="8"></div>
+                </div>
+                <div class="game-info tic-tac-toe-info">
+                    <p>Pemain Saat Ini: <span id="tic-tac-toe-current-player">X</span></p>
+                    <p id="tic-tac-toe-status">Giliran X</p>
+                    <button id="reset-tic-tac-toe-btn" class="btn btn-game-reset">Mulai Ulang Game</button>
+                </div>
+            </div>
+
+            <div id="rockPaperScissorsGameContainer" class="game-container hidden-game">
+                <p class="game-description">Pilih salah satu: Batu, Gunting, atau Kertas! Lawan komputer dan lihat siapa yang menang.</p>
+                <div class="rps-choices">
+                    <button id="rps-rock" class="rps-btn">✊ Batu</button>
+                    <button id="rps-paper" class="rps-btn">✋ Kertas</button>
+                    <button id="rps-scissors" class="rps-btn">✌️ Gunting</button>
+                </div>
+                <div class="rps-results game-info">
+                    <p>Anda memilih: <span id="rps-player-choice">?</span></p>
+                    <p>Komputer memilih: <span id="rps-computer-choice">?</span></p>
+                    <p class="rps-status" id="rps-status">Pilih gerakanmu!</p>
+                    <button id="reset-rps-btn" class="btn btn-game-reset">Main Lagi</button>
+                </div>
+            </div>
+
+            <div id="guessTheNumberGameContainer" class="game-container hidden-game">
+                <p class="game-description">Saya memikirkan angka antara 1 dan 100. Bisakah kamu menebaknya?</p>
+                <div class="guess-input-area">
+                    <input type="number" id="guess-input" min="1" max="100" placeholder="Masukkan tebakanmu">
+                    <button id="guess-btn" class="btn btn-primary">Tebak</button>
+                </div>
+                <div class="guess-results game-info">
+                    <p id="guess-feedback">Mulai menebak!</p>
+                    <p>Jumlah Tebakan: <span id="guess-count">0</span></p>
+                    <button id="reset-guess-btn" class="btn btn-game-reset">Mulai Ulang Game</button>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -83,7 +151,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Toko Seru. Semua Hak Dilindungi.</p>
+            <p>&copy; 2024 Toko Seru. Semua Hak Dilindungi.</p>
         </div>
     </footer>
 

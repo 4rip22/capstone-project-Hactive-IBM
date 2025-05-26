@@ -205,14 +205,14 @@ p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-.products-section h2, .game-section h2, .contact-section h2 {
+.products-section h2, .game-section h2, .contact-section h2, .recommendations-section h2 {
     text-align: center;
     font-size: 36px;
     margin-bottom: 50px;
     position: relative;
 }
 
-.products-section h2::after, .game-section h2::after, .contact-section h2::after {
+.products-section h2::after, .game-section h2::after, .contact-section h2::after, .recommendations-section h2::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -224,10 +224,62 @@ p {
     border-radius: 2px;
 }
 
+/* Search Bar Styles */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 10px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.search-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.search-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+}
+
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+}
+
+.product-grid p { /* Style for "No products found" message */
+    grid-column: 1 / -1; /* Span across all columns */
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    margin-top: 20px;
 }
 
 .product-card {
@@ -271,6 +323,16 @@ p {
     margin-bottom: 15px;
 }
 
+/* Recommendation Section */
+.recommendations-section {
+    padding: 80px 0;
+    background-color: #eaf1f7; /* Light blue background for recommendations */
+    margin-top: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+
 /* Game Section */
 .game-section {
     padding: 80px 0;
@@ -280,6 +342,36 @@ p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
+
+.game-selection-buttons {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+.btn-game-select {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+.btn-game-select:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(52, 152, 219, 0.4);
+}
+
+.btn-game-select.active {
+    background-color: #2ecc71; /* Active color */
+    box-shadow: 0 3px 10px rgba(46, 204, 113, 0.4);
+}
+
 
 .game-description {
     font-size: 18px;
@@ -292,9 +384,18 @@ p {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.game-board {
+.hidden-game {
+    display: none; /* Used to hide game containers */
+}
+
+/* Memory Game Board */
+.game-board { /* Re-using .game-board for memory game */
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columns for cards */
     gap: 15px;
@@ -348,7 +449,7 @@ p {
 }
 
 .game-info {
-    background-color: #fff;
+    background-color: #fff; /* Changed from #fff to inherit from .game-container */
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -367,6 +468,119 @@ p {
     font-weight: 700;
     color: #3498db;
 }
+
+/* Tic Tac Toe Board */
+.tic-tac-toe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px); /* 3x3 grid */
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    background-color: #2c3e50; /* Dark background for board lines */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.tic-tac-toe-board .cell {
+    width: 100px;
+    height: 100px;
+    background-color: #ecf0f1; /* Light cell background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #34495e; /* Default color for X/O */
+}
+
+.tic-tac-toe-board .cell:hover {
+    background-color: #dce3e7;
+}
+
+.tic-tac-toe-board .cell.X {
+    color: #e74c3c; /* Red for X */
+}
+
+.tic-tac-toe-board .cell.O {
+    color: #3498db; /* Blue for O */
+}
+
+.tic-tac-toe-info {
+    margin-top: 20px;
+}
+
+/* Rock Paper Scissors Styles */
+.rps-choices {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.rps-btn {
+    background-color: #f1c40f; /* Yellow */
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 30px; /* Emoji size */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(241, 196, 15, 0.3);
+    font-weight: bold;
+}
+
+.rps-btn:hover {
+    background-color: #f39c12; /* Darker Yellow */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(241, 196, 15, 0.4);
+}
+
+.rps-results {
+    margin-top: 20px;
+}
+
+.rps-status {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #2c3e50;
+}
+
+/* Guess The Number Styles */
+.guess-input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.guess-input-area input[type="number"] {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 18px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.guess-input-area input[type="number"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.guess-input-area .btn-primary {
+    padding: 12px 25px;
+    font-size: 18px;
+}
+
+.guess-results {
+    margin-top: 20px;
+}
+
 
 /* Contact Section */
 .contact-section {
@@ -683,7 +897,7 @@ p {
         margin-top: 15px;
     }
 
-    .products-section h2, .game-section h2, .contact-section h2 {
+    .products-section h2, .game-section h2, .contact-section h2, .recommendations-section h2 {
         font-size: 30px;
     }
 
@@ -719,6 +933,71 @@ p {
     .contact-form {
         padding: 20px;
     }
+
+    /* Responsive adjustments for search bar */
+    .search-bar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .search-input {
+        max-width: 100%; /* Take full width on mobile */
+        margin-bottom: 15px; /* Add space below input */
+    }
+    .search-button {
+        width: 100%; /* Full width button on mobile */
+        max-width: 200px; /* Limit button width */
+    }
+
+    /* Game Selection Buttons Responsive */
+    .game-selection-buttons {
+        gap: 10px;
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        align-items: center; /* Center items when stacked */
+    }
+    .btn-game-select {
+        width: 100%; /* Full width for game selection buttons */
+        max-width: 250px; /* Limit width */
+    }
+
+
+    /* Tic Tac Toe Responsive */
+    .tic-tac-toe-board {
+        grid-template-columns: repeat(3, 80px); /* Adjust cell size */
+        grid-template-rows: repeat(3, 80px);
+        gap: 3px;
+    }
+    .tic-tac-toe-board .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    }
+
+    /* Rock Paper Scissors Responsive */
+    .rps-choices {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .rps-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        font-size: 24px;
+        padding: 12px 20px;
+    }
+
+    /* Guess The Number Responsive */
+    .guess-input-area {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .guess-input-area input[type="number"] {
+        width: 100%;
+        max-width: 200px;
+    }
+    .guess-input-area .btn-primary {
+        width: 100%;
+        max-width: 200px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -735,11 +1014,23 @@ p {
     }
 
     .game-board {
-        grid-template-columns: repeat(1, 3fr); /* Even smaller for very small screens */
+        grid-template-columns: repeat(2, 1fr); /* Even smaller for very small screens */
         max-width: 300px;
     }
 
     .card-face {
+        font-size: 30px;
+    }
+
+    /* Tic Tac Toe Responsive for very small screens */
+    .tic-tac-toe-board {
+        grid-template-columns: repeat(3, 60px); /* Adjust cell size */
+        grid-template-rows: repeat(3, 60px);
+        gap: 2px;
+    }
+    .tic-tac-toe-board .cell {
+        width: 60px;
+        height: 60px;
         font-size: 30px;
     }
 }

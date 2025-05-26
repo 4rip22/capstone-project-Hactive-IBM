@@ -735,7 +735,7 @@ p {
     }
 
     .game-board {
-        grid-template-columns: repeat(2, 1fr); /* Even smaller for very small screens */
+        grid-template-columns: repeat(1, 3fr); /* Even smaller for very small screens */
         max-width: 300px;
     }
 

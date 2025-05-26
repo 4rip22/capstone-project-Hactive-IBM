@@ -23,12 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elemen Rekomendasi
     const recommendationGrid = document.getElementById('recommendationGrid');
 
+    // Elemen Hero Background Slideshow
+    const heroBackgroundSlideshow = document.getElementById('heroBackgroundSlideshow');
+    const heroBgImg1 = document.getElementById('heroBgImg1');
+    const heroBgImg2 = document.getElementById('heroBgImg2');
+
 
     // Data produk (akan diisi dari API dan produk statis)
     let products = []; // Array untuk menyimpan semua produk yang diambil dari API
     let cart = loadCart(); // Keranjang akan menyimpan objek { product: {}, quantity: N }
 
-    // Produk statis tambahan
+    // Produk statis tambahan dengan URL gambar yang valid
     const staticProducts = [
         { id: 101, title: 'iPhone 15 Pro Max', price: 1500, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcu0vb2Gg-iybuhgRgBPZqsfyC5KYNcIEICA&s', category: 'electronics' }, 
         { id: 102, title: 'Laptop Gaming ROG Strix', price: 2000, image: 'https://gizmologi.id/wp-content/uploads/2020/08/asus-rog-strix-g1517.jpg', category: 'electronics' }, 
@@ -45,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchProducts() {
         productGrid.innerHTML = '<p class="loading-message">Memuat produk...</p>'; // Tampilkan pesan loading
         try {
-            // Mengambil lebih banyak produk (misalnya 20) dari FakestoreAPI
-            const response = await fetch('https://fakestoreapi.com/products?limit=20');
+            // Mengambil 10 produk dari FakestoreAPI
+            const response = await fetch('https://fakestoreapi.com/products?limit=10');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -61,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.warn('Tidak ada produk yang tersedia setelah penggabungan!');
             }
             renderProducts(products); // Render semua produk setelah dimuat
+            startHeroBackgroundSlideshow(); // Mulai slideshow setelah produk dimuat
             renderRecommendations(); // Tampilkan rekomendasi awal
         } catch (error) {
             console.error('Error fetching products:', error);
@@ -133,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Penting: Event listener harus ditambahkan setelah elemen dirender
         containerElement.querySelectorAll('.btn-add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                const productId = parseInt(event.target.dataset.id); // Pastikan ID adalah angka
+                const productId = typeof event.target.dataset.id === 'string' ? event.target.dataset.id : parseInt(event.target.dataset.id); // Tangani ID sebagai string atau number
                 console.log('Tombol "Tambah ke Keranjang" diklik. Product ID:', productId, 'Tipe:', typeof productId);
                 addToCart(productId);
             });
@@ -175,7 +181,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fungsi untuk menambahkan produk ke keranjang (Create)
     function addToCart(productId) {
         console.log('Memulai addToCart untuk productId:', productId);
-        const productToAdd = products.find(p => p.id === productId); // Dapatkan detail produk lengkap
+        // Penting: Cari produk berdasarkan ID yang sesuai (bisa number atau string)
+        const productToAdd = products.find(p => p.id == productId); // Gunakan == untuk perbandingan longgar
 
         if (!productToAdd) {
             console.error('ERROR: Produk tidak ditemukan di daftar produk global saat addToCart:', productId);
@@ -184,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Penting: Cari item di keranjang berdasarkan product.id yang ada di dalam objek product
-        const existingItemIndex = cart.findIndex(item => item.product.id === productId); 
+        const existingItemIndex = cart.findIndex(item => item.product.id == productId); // Gunakan ==
         console.log('Keranjang sebelum penambahan/pembaruan:', JSON.parse(JSON.stringify(cart))); // Log deep copy
         console.log('Existing item index:', existingItemIndex);
 
@@ -265,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Penting: Event listener harus ditambahkan setelah elemen dirender
         cartItemsContainer.querySelectorAll('.increase-quantity').forEach(button => {
             button.addEventListener('click', (event) => {
-                const productId = parseInt(event.target.dataset.id);
+                const productId = typeof event.target.dataset.id === 'string' ? event.target.dataset.id : parseInt(event.target.dataset.id);
                 console.log('Tombol "+" diklik untuk Product ID:', productId);
                 updateQuantity(productId, 1); // Tambah 1
             });
@@ -273,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItemsContainer.querySelectorAll('.decrease-quantity').forEach(button => {
             button.addEventListener('click', (event) => {
-                const productId = parseInt(event.target.dataset.id);
+                const productId = typeof event.target.dataset.id === 'string' ? event.target.dataset.id : parseInt(event.target.dataset.id);
                 console.log('Tombol "-" diklik untuk Product ID:', productId);
                 updateQuantity(productId, -1); // Kurang 1
             });
@@ -281,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartItemsContainer.querySelectorAll('.remove-item-btn').forEach(button => {
             button.addEventListener('click', (event) => {
-                const productId = parseInt(event.target.dataset.id);
+                const productId = typeof event.target.dataset.id === 'string' ? event.target.dataset.id : parseInt(event.target.dataset.id);
                 console.log('Tombol "Hapus" diklik untuk Product ID:', productId);
                 removeItemFromCart(productId);
             });
@@ -292,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateQuantity(productId, change) {
         console.log('Memulai updateQuantity untuk productId:', productId, 'perubahan:', change);
         // Penting: Cari item di keranjang berdasarkan product.id yang ada di dalam objek product
-        const itemIndex = cart.findIndex(item => item.product.id === productId); 
+        const itemIndex = cart.findIndex(item => item.product.id == productId); // Gunakan ==
         
         if (itemIndex > -1) {
             const product = cart[itemIndex].product; // Dapatkan detail produk langsung dari item keranjang
@@ -319,9 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function removeItemFromCart(productId) {
         console.log('Memulai removeItemFromCart untuk productId:', productId);
         // Penting: Temukan produk untuk notifikasi sebelum difilter
-        const productToRemove = cart.find(item => item.product.id === productId); 
+        const productToRemove = cart.find(item => item.product.id == productId); // Gunakan ==
         // Filter berdasarkan product.id yang ada di dalam objek product
-        cart = cart.filter(item => item.product.id !== productId); 
+        cart = cart.filter(item => item.product.id != productId); // Gunakan !=
         saveCart();
         updateCartCountDisplay();
         renderCartItems();
@@ -874,6 +881,53 @@ document.addEventListener('DOMContentLoaded', () => {
     selectTicTacToeBtn.addEventListener('click', () => switchGame('ticTacToeGameContainer'));
     selectRockPaperScissorsBtn.addEventListener('click', () => switchGame('rockPaperScissorsGameContainer'));
     selectGuessTheNumberBtn.addEventListener('click', () => switchGame('guessTheNumberGameContainer'));
+
+
+    // --- Logika Slideshow Latar Belakang Hero ---
+    let heroBgImages = []; // Akan diisi dengan URL gambar produk
+    let currentHeroBgIndex = 0;
+    let heroSlideshowInterval;
+    const slideshowDuration = 5000; // Ganti gambar setiap 5 detik
+    const fadeDuration = 1500; // Durasi transisi fade
+
+    function startHeroBackgroundSlideshow() {
+        // Filter produk yang memiliki gambar yang valid dan ambil beberapa untuk slideshow
+        heroBgImages = products.filter(p => p.image && p.image.startsWith('http')).map(p => p.image);
+        shuffle(heroBgImages); // Acak urutan gambar
+        heroBgImages = heroBgImages.slice(0, Math.min(heroBgImages.length, 5)); // Ambil maksimal 5 gambar
+
+        if (heroBgImages.length === 0) {
+            console.warn('Tidak ada gambar produk yang cukup untuk slideshow latar belakang hero.');
+            heroBackgroundSlideshow.style.backgroundImage = 'linear-gradient(to right, #3498db, #2ecc71)'; // Fallback
+            return;
+        }
+
+        // Inisialisasi gambar pertama
+        heroBgImg1.src = heroBgImages[0];
+        heroBgImg1.classList.add('active');
+        currentHeroBgIndex = 0;
+
+        if (heroBgImages.length > 1) {
+            heroSlideshowInterval = setInterval(() => {
+                currentHeroBgIndex = (currentHeroBgIndex + 1) % heroBgImages.length;
+                const nextImageSrc = heroBgImages[currentHeroBgIndex];
+
+                // Tentukan gambar mana yang aktif dan yang akan menjadi aktif
+                const activeImg = heroBgImg1.classList.contains('active') ? heroBgImg1 : heroBgImg2;
+                const inactiveImg = heroBgImg1.classList.contains('active') ? heroBgImg2 : heroBgImg1;
+
+                // Muat gambar berikutnya ke gambar yang tidak aktif
+                inactiveImg.src = nextImageSrc;
+
+                // Tunggu sebentar agar gambar dimuat, lalu lakukan cross-fade
+                setTimeout(() => {
+                    activeImg.classList.remove('active');
+                    inactiveImg.classList.add('active');
+                }, 100); // Sedikit delay untuk memastikan src diatur sebelum transisi
+
+            }, slideshowDuration);
+        }
+    }
 
 
     // Inisialisasi saat DOM dimuat

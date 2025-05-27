@@ -204,3 +204,7 @@ Klik tombol "Kirim Pesan".
 Pengiriman pesan akan disimulasikan (data akan dicetak ke konsol browser Anda), dan Anda akan menerima notifikasi sukses.
 
 Terima kasih telah mengunjungi Toko Seru! Selamat berbelanja dan bermain game!
+
+
+
+Link Deploy Websitenya : [deploy](https://capstone-project-aripsaputra.netlify.app/)

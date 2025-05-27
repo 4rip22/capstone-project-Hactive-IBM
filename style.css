@@ -175,7 +175,7 @@ p {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(to right, #3498db, #2ecc71); /* Fallback gradient background */
+    background: linear-gradient(to right, #3498db,rgb(245, 245, 245)); /* Fallback gradient background */
     color: #fff;
     padding: 100px 0;
     text-align: center;
@@ -183,6 +183,7 @@ p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     position: relative; /* Needed for absolute positioning of children */
     overflow: hidden; /* Hide overflowing background images */
+    min-height: 400px; /* Ensure a minimum height for the hero section */
 }
 
 .hero-background-slideshow {
@@ -203,20 +204,23 @@ p {
     object-fit: cover; /* Cover the entire area */
     opacity: 0; /* Initially hidden */
     transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
-    animation: zoomPan 20s infinite alternate ease-in-out; /* Subtle zoom and pan */
-    transform-origin: center center; /* Ensure zoom is from center */
+    animation: backgroundPan 20s infinite linear alternate; /* Slower, continuous pan */
+    transform-origin: center center; /* For consistent scaling */
 }
 
 .hero-bg-img.active {
     opacity: 1; /* Active image is visible */
 }
 
-@keyframes zoomPan {
+@keyframes backgroundPan {
     0% {
-        transform: scale(1) translateX(0%);
+        transform: scale(1) translateX(0%) rotateZ(0deg); /* Start at original size, no pan or rotation */
+    }
+    50% {
+        transform: scale(1.0000001) translateX(-0.00001%) rotateZ(0.000001deg); /* Extremely, extremely subtle zoom, pan, and rotation */
     }
     100% {
-        transform: scale(1.1) translateX(-5%); /* Subtle zoom and slight pan */
+        transform: scale(1) translateX(0%) rotateZ(0deg); /* Return to start, completing loop */
     }
 }
 
@@ -479,7 +483,7 @@ p {
 }
 
 .card-front {
-    background-color: #3498db; /* Blue for card back */
+    background-color: #3498db;
     color: #fff;
     border: 3px solid #2980b9;
     font-weight: bold;
@@ -713,7 +717,7 @@ p {
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     justify-content: center;
@@ -989,7 +993,7 @@ p {
         margin-bottom: 15px; /* Add space below input */
     }
     .search-button {
-        width: 100%; /* Full width button on mobile */
+        width: 100%;
         max-width: 200px; /* Limit button width */
     }
 
